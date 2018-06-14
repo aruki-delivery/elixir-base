@@ -6,7 +6,7 @@ MAINTAINER Carlos Brito Lage <cbl@aruki.pt>
 # is updated with the current date. It will force refresh of all
 # of the base images and things like `apt-get update` won't be using
 # old cached versions when the Dockerfile is built.
-ENV REFRESHED_AT=2018-05-08 \
+ENV REFRESHED_AT=2018-06-14-125340 \
     LANG=en_US.UTF-8 \
     HOME=/opt/app/ \
     # Set this so that CTRL+G works properly
@@ -88,14 +88,6 @@ RUN \
     # Update ca certificates
     update-ca-certificates --fresh
 
-## Install Graphicsmagick, etc
-RUN \
-    apk --no-cache --update upgrade && \
-    apk add --no-cache \
-      make@edge \
-      libtool@main \
-      graphicsmagick@edge
-
 ## Intall Elixir
 
 WORKDIR /tmp/elixir-build
@@ -118,8 +110,8 @@ RUN \
 WORKDIR ${HOME}
 
 ## Cleanup
-RUN \
-    rm -rf /var/cache/apk/* \
-    rm -rf /tmp
+RUN rm -rf /var/cache/apk/* &&  \
+    rm -rf /tmp/* &&  \
+    rm -rf /var/log/*
 
 CMD ["/bin/sh"]
