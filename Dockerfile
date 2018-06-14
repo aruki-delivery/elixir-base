@@ -88,6 +88,16 @@ RUN \
     # Update ca certificates
     update-ca-certificates --fresh
 
+## Install Graphicsmagick, etc
+RUN \
+    apk --no-cache --update upgrade && \
+    apk add --no-cache \
+      make@edge \
+      libtool@main \
+      graphicsmagick@edge
+
+## Intall Elixir
+
 WORKDIR /tmp/elixir-build
 
 RUN \
@@ -106,5 +116,10 @@ RUN \
     apk del .elixir-build
 
 WORKDIR ${HOME}
+
+## Cleanup
+RUN \
+    rm -rf /var/cache/apk/* \
+    rm -rf /tmp
 
 CMD ["/bin/sh"]
