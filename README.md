@@ -1,4 +1,4 @@
-# aruki-elixir-server
+# elixir-base
 
 Base Docker image for our Elixir-based services.
 
