@@ -1,3 +1,5 @@
-# aruki-elixir-server
+# elixir-base
 
-Base docker image for our Elixir docker files
+Base Docker image for our Elixir-based services.
+
+https://cloud.docker.com/swarm/aruki/repository/docker/aruki/elixir-base/general
