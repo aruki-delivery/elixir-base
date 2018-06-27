@@ -6,12 +6,12 @@ MAINTAINER Carlos Brito Lage <cbl@aruki.pt>
 # is updated with the current date. It will force refresh of all
 # of the base images and things like `apt-get update` won't be using
 # old cached versions when the Dockerfile is built.
-ENV REFRESHED_AT=2018-06-17-174841 \
+ENV REFRESHED_AT=2018-06-27-200802 \
     LANG=en_US.UTF-8 \
     HOME=/opt/app/ \
     # Set this so that CTRL+G works properly
     TERM=xterm \
-    ERLANG_VERSION=21.0 \
+    ERLANG_VERSION=21.0.1 \
     ELIXIR_VERSION=v1.6.6
 
 WORKDIR /tmp/erlang-build
@@ -114,7 +114,7 @@ RUN rm -rf /var/cache/apk/* &&  \
     rm -rf /tmp/* &&  \
     rm -rf /var/log/*
 
-RUN echo "Erlang/OTP Version: $()"
+RUN echo "Erlang/OTP Version:"
 RUN erl -eval '{ok, Version} = file:read_file(filename:join([code:root_dir(), "releases", erlang:system_info(otp_release), "OTP_VERSION"])), io:fwrite(Version), halt().' -noshell
 RUN echo "Elixir Version:"
 RUN iex -v
