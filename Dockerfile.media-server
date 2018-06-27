@@ -1,4 +1,4 @@
-FROM aruki/elixir-base:v21.1.6.6-20180623050302
+FROM aruki/elixir-base:v21.0.1-1.6.6-20180627202805
 
 MAINTAINER Carlos Brito Lage <cbl@aruki.pt>
 
