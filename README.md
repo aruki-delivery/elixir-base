@@ -7,7 +7,7 @@ https://cloud.docker.com/swarm/aruki/repository/docker/aruki/elixir-base/general
 
 # Usage
 
-``Dockerfile
+```Dockerfile
 ## Builder image that prepares the build and puts it in the Docker image that runs:
 FROM aruki/elixir-base:v21.0.2-1.6.6-20180704220547 as builder
 
