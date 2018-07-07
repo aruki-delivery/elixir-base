@@ -130,7 +130,8 @@ WORKDIR ${HOME}
 ## Cleanup
 RUN rm -rf /var/cache/apk/* &&  \
     rm -rf /tmp/* &&  \
-    rm -rf /var/log/*
+    rm -rf /var/log/* && \
+    rm -rf ${HOME}/.mix
 
 RUN echo "Erlang/OTP Version:"
 RUN erl -eval '{ok, Version} = file:read_file(filename:join([code:root_dir(), "releases", erlang:system_info(otp_release), "OTP_VERSION"])), io:fwrite(Version), halt().' -noshell
