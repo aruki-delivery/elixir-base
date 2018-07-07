@@ -1,4 +1,4 @@
-FROM alpine:3.7
+FROM alpine:3.8
 
 MAINTAINER Carlos Brito Lage <cbl@aruki.pt>
 
@@ -6,7 +6,7 @@ MAINTAINER Carlos Brito Lage <cbl@aruki.pt>
 # is updated with the current date. It will force refresh of all
 # of the base images and things like `apt-get update` won't be using
 # old cached versions when the Dockerfile is built.
-ENV REFRESHED_AT=2018-07-04-194235 \
+ENV REFRESHED_AT=2018-07-07-035142 \
     LANG=en_US.UTF-8 \
     HOME=/opt/app/ \
     # Set this so that CTRL+G works properly
@@ -23,27 +23,31 @@ RUN \
     adduser -s /bin/sh -u 1001 -G root -h "${HOME}" -S -D default && \
     chown -R 1001:0 "${HOME}" && \
     # Add tagged repos as well as the edge repo so that we can selectively install edge packages
-    echo "@main http://dl-cdn.alpinelinux.org/alpine/v3.7/main" >> /etc/apk/repositories && \
-    echo "@community http://dl-cdn.alpinelinux.org/alpine/v3.7/community" >> /etc/apk/repositories && \
+    echo "@main http://dl-cdn.alpinelinux.org/alpine/v3.8/main" >> /etc/apk/repositories && \
+    echo "@community http://dl-cdn.alpinelinux.org/alpine/v3.8/community" >> /etc/apk/repositories && \
     echo "@edge http://nl.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories && \
     # Upgrade Alpine and base packages
     apk --no-cache upgrade && \
     # Distillery requires bash
-    apk add --no-cache bash@main && \
+    apk add --no-cache bash@edge && \
     # Install Erlang/OTP deps
     apk add --no-cache pcre@edge && \
     apk add --no-cache \
-      ca-certificates@main \
-      openssl-dev@main \
-      ncurses-dev@main \
-      unixodbc-dev@main \
-      zlib-dev@main && \
-    # Install Erlang/OTP build deps
-    apk add --no-cache --virtual .erlang-build \
-      dpkg-dev@main dpkg@main \
-      git@main autoconf@main build-base@main perl-dev@main && \
-    # Shallow clone Erlang/OTP
-    git clone -b OTP-$ERLANG_VERSION --single-branch --depth 1 https://github.com/erlang/otp.git . && \
+      ca-certificates@edge \
+      openssl-dev@edge \
+      ncurses-dev@edge \
+      unixodbc-dev@edge \
+      zlib-dev@edge \
+      dpkg-dev@edge \
+      dpkg@edge \
+      git@edge \
+      autoconf@edge \
+      build-base@edge \
+      perl-dev@edge && \
+      # Shallow clone Erlang/OTP
+      git clone -b OTP-$ERLANG_VERSION --single-branch --depth 1 https://github.com/erlang/otp.git .
+
+RUN \
     # Erlang/OTP build env
     export ERL_TOP=/tmp/erlang-build && \
     export PATH=$ERL_TOP/bin:$PATH && \
@@ -80,9 +84,16 @@ RUN \
       --enable-dialyzer \
       --enable-hipe && \
     # Build
-    make -j4 && make install && \
+    make -j4 && make install
+
+RUN \
     # Cleanup
-    apk del --force .erlang-build && \
+    apk del dpkg-dev \
+         dpkg \
+         git \
+         autoconf \
+         build-base \
+         perl-dev && \
     cd $HOME && \
     rm -rf /tmp/erlang-build && \
     # Update ca certificates
@@ -94,18 +105,17 @@ WORKDIR /tmp/elixir-build
 
 RUN \
     apk --no-cache --update upgrade && \
-    apk add --no-cache --update --virtual .elixir-build \
-      make && \
-    apk add --no-cache --update \
-      git && \
-    git clone https://github.com/elixir-lang/elixir --depth 1 --branch $ELIXIR_VERSION && \
+    apk add --no-cache --update make@edge git@edge && \
+    git clone https://github.com/elixir-lang/elixir --depth 1 --branch $ELIXIR_VERSION
+
+RUN \
     cd elixir && \
     make && make install && \
     mix local.hex --force && \
     mix local.rebar --force && \
     cd $HOME && \
     rm -rf /tmp/elixir-build && \
-    apk del .elixir-build
+    apk del make git
 
 WORKDIR ${HOME}
 
