@@ -33,6 +33,7 @@ RUN \
     # Install Erlang/OTP deps
     apk add --no-cache pcre@edge && \
     apk add --no-cache \
+      alpine-sdk@edge \
       ca-certificates@edge \
       openssl-dev@edge \
       ncurses-dev@edge \
@@ -88,12 +89,18 @@ RUN \
 
 RUN \
     # Cleanup
-    apk del dpkg-dev \
-         dpkg \
-         git \
-         autoconf \
-         build-base \
-         perl-dev && \
+    apk del \
+        alpine-sdk \
+        zlib-dev \
+        ncurses-dev \
+        openssl-dev \
+        unixodbc-dev \
+        dpkg-dev \
+        dpkg \
+        git \
+        autoconf \
+        build-base \
+        perl-dev && \
     cd $HOME && \
     rm -rf /tmp/erlang-build && \
     # Update ca certificates
@@ -105,7 +112,8 @@ WORKDIR /tmp/elixir-build
 
 RUN \
     apk --no-cache --update upgrade && \
-    apk add --no-cache --update make@edge git@edge && \
+    apk add --no-cache alpine-sdk git openssl-dev && \
+    which make && \
     git clone https://github.com/elixir-lang/elixir --depth 1 --branch $ELIXIR_VERSION
 
 RUN \
@@ -115,7 +123,7 @@ RUN \
     mix local.rebar --force && \
     cd $HOME && \
     rm -rf /tmp/elixir-build && \
-    apk del make git
+    apk del alpine-sdk git openssl-dev
 
 WORKDIR ${HOME}
 
