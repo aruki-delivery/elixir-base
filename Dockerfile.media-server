@@ -1,4 +1,4 @@
-FROM aruki/elixir-base:v21.0.2-1.6.6-20180707043442
+FROM aruki/elixir-base:v21.0.2-1.6.6-20180710021451
 
 MAINTAINER Carlos Brito Lage <cbl@aruki.pt>
 
@@ -7,7 +7,7 @@ MAINTAINER Carlos Brito Lage <cbl@aruki.pt>
 # of the base images and things like `apt-get update` won't be using
 # old cached versions when the Dockerfile is built.
 ENV REPLACE_OS_VARS "true"
-ENV REFRESHED_AT "2018-06-22-200503"
+ENV REFRESHED_AT "2018-07-10-030539"
 ENV HOME "/opt/app/"
 # Set this so that CTRL+G works properly
 ENV TERM "xterm"
