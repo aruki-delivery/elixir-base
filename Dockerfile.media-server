@@ -1,4 +1,4 @@
-FROM aruki/elixir-base:v21.0.2-1.6.6-20180710021451
+FROM gcr.io/aruki-dev/github-aruki-delivery-elixir-base:v21.0.2-1.6.6-20180710030902-d406f7d5d9ed8e1063ba1e6c30060e8a2845e6fb
 
 MAINTAINER Carlos Brito Lage <cbl@aruki.pt>
 
