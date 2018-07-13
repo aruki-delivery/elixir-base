@@ -11,7 +11,7 @@ ENV REFRESHED_AT=2018-07-10-013507 \
     HOME=/opt/app/ \
     # Set this so that CTRL+G works properly
     TERM=xterm \
-    ERLANG_VERSION=21.0.2 \
+    ERLANG_VERSION=21.0.3 \
     ELIXIR_VERSION=v1.6.6
 
 RUN rm -rf /opt/erlang/build && \
