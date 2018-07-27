@@ -6,13 +6,13 @@ MAINTAINER Carlos Brito Lage <cbl@aruki.pt>
 # is updated with the current date. It will force refresh of all
 # of the base images and things like `apt-get update` won't be using
 # old cached versions when the Dockerfile is built.
-ENV REFRESHED_AT=2018-07-26-151729 \
+ENV REFRESHED_AT=2018-07-27-211411 \
     LANG=en_US.UTF-8 \
     HOME=/opt/app/ \
     # Set this so that CTRL+G works properly
     TERM=xterm \
     ERLANG_VERSION=21.0.4 \
-    ELIXIR_VERSION=v1.7.0
+    ELIXIR_VERSION=v1.6.6
 
 RUN rm -rf /opt/erlang/build && \
     rm -rf /opt/elixir/build && \
