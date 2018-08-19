@@ -6,7 +6,7 @@ MAINTAINER Carlos Brito Lage <cbl@aruki.pt>
 # is updated with the current date. It will force refresh of all
 # of the base images and things like `apt-get update` won't be using
 # old cached versions when the Dockerfile is built.
-ENV REFRESHED_AT=2018-08-13-024333 \
+ENV REFRESHED_AT=2018-08-19-101718  \
     LANG=en_US.UTF-8 \
     HOME=/opt/app/ \
     # Set this so that CTRL+G works properly
@@ -16,10 +16,16 @@ ENV REFRESHED_AT=2018-08-13-024333 \
 
 RUN rm -rf /opt/erlang/build && \
     rm -rf /opt/elixir/build && \
+    rm -rf /opt/app && \
     mkdir -p /opt/erlang/build && \
-    mkdir -p /opt/elixir/build
+    mkdir -p /opt/elixir/build && \
+    mkdir -p /opt/app
 
-WORKDIR /tmp/erlang-build
+
+ENV TMPDIR /tmp
+VOLUME /tmp/
+
+WORKDIR /opt/app/erlang/build
 
 # Install Erlang
 RUN \
@@ -57,7 +63,7 @@ RUN \
 
 RUN \
     # Erlang/OTP build env
-    export ERL_TOP=/tmp/erlang-build && \
+    export ERL_TOP=/opt/app/erlang/build && \
     export PATH=$ERL_TOP/bin:$PATH && \
     export CPPFlAGS="-D_BSD_SOURCE $CPPFLAGS" && \
     # Configure
@@ -109,7 +115,7 @@ RUN \
 
 ## Intall Elixir
 
-WORKDIR /tmp/elixir-build
+WORKDIR /opt/app/elixir/build
 
 RUN \
     git clone https://github.com/elixir-lang/elixir --depth 1 --branch $ELIXIR_VERSION && \
@@ -122,15 +128,20 @@ RUN \
     ln -s /opt/elixir/build/bin/iex /usr/local/bin/iex && \
     ln -s /opt/elixir/build/bin/mix /usr/local/bin/mix
 
-RUN \
-    mix local.hex --force && \
-    mix local.rebar --force
-
 
 ########
 ## Actual Docker image that's gonna run inside docker:
 ########
 FROM alpine:3.8
+
+ENV LANG=en_US.UTF-8 \
+    HOME=/opt/app/ \
+    # Set this so that CTRL+G works properly
+    TERM=xterm
+
+ENV TMPDIR /tmp
+
+VOLUME /tmp/
 
 RUN \
     # Create default user and home directory, set owner to default
@@ -154,9 +165,12 @@ RUN \
       # Update ca certificates
       update-ca-certificates --fresh
 
-RUN rm -rf /opt/ && \
+RUN rm -rf /opt/erlang/build && \
+    rm -rf /opt/elixir/build && \
+    rm -rf /opt/app && \
+    mkdir -p /opt/erlang/build && \
     mkdir -p /opt/elixir/build && \
-    mkdir -p /opt/erlang/build
+    mkdir -p /opt/app
 
 ## Copy build from builder image
 COPY --from=builder /opt/erlang/build/ /opt/erlang/build
@@ -176,6 +190,12 @@ RUN \
     ln -s /opt/elixir/build/bin/elixirc /usr/local/bin/elixirc && \
     ln -s /opt/elixir/build/bin/iex /usr/local/bin/iex && \
     ln -s /opt/elixir/build/bin/mix /usr/local/bin/mix
+
+WORKDIR ${HOME}
+
+RUN \
+    mix local.hex --force && \
+    mix local.rebar --force
 
 ## Cleanup
 RUN rm -rf /var/cache/apk/* &&  \
