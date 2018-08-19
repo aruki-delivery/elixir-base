@@ -1,4 +1,4 @@
-FROM gcr.io/aruki-dev/github-aruki-delivery-elixir-base:v21.0.5-1.7.2-20180813030401-bc62bbc77f9894e36d1d85dce82a4d4699c4c460
+FROM gcr.io/aruki-dev/github-aruki-delivery-elixir-base:v21.0.5-1.7.2-20180819103710-c7ace1adf81d5ece0595ce6ff8aa3d48e524fbe0
 
 
 MAINTAINER Carlos Brito Lage <cbl@aruki.pt>
@@ -8,7 +8,7 @@ MAINTAINER Carlos Brito Lage <cbl@aruki.pt>
 # of the base images and things like `apt-get update` won't be using
 # old cached versions when the Dockerfile is built.
 ENV REPLACE_OS_VARS "true"
-ENV REFRESHED_AT "2018-08-13-101218"
+ENV REFRESHED_AT "2018-08-19-105811"
 ENV HOME "/opt/app/"
 # Set this so that CTRL+G works properly
 ENV TERM "xterm"
