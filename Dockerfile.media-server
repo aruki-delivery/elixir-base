@@ -1,5 +1,4 @@
-FROM gcr.io/aruki-dev/github-aruki-delivery-elixir-base:v21.0.5-1.7.2-20180819103710-c7ace1adf81d5ece0595ce6ff8aa3d48e524fbe0
-
+FROM bitwalker/alpine-elixir:1.7.2
 
 MAINTAINER Carlos Brito Lage <cbl@aruki.pt>
 
@@ -15,7 +14,7 @@ ENV TERM "xterm"
 
 RUN \
     apk --no-cache --update upgrade && \
-    apk add --no-cache imagemagick@edge && \
+    apk add --no-cache imagemagick && \
     which magick && \
     magick -version
 
