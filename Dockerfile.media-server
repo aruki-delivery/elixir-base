@@ -7,14 +7,14 @@ MAINTAINER Carlos Brito Lage <cbl@aruki.pt>
 # of the base images and things like `apt-get update` won't be using
 # old cached versions when the Dockerfile is built.
 ENV REPLACE_OS_VARS "true"
-ENV REFRESHED_AT "2018-09-10-152149"
+ENV REFRESHED_AT "2018-09-12-192700"
 ENV HOME "/opt/app/"
 # Set this so that CTRL+G works properly
 ENV TERM "xterm"
 
 RUN \
     apk --no-cache --update upgrade && \
-    apk add --no-cache imagemagick && \
+    apk add --no-cache imagemagick icu-dev && \
     which magick && \
     magick -version
 
@@ -22,7 +22,6 @@ RUN \
 RUN rm -rf /var/cache/apk/* &&  \
     rm -rf /tmp/* &&  \
     rm -rf /var/log/*
-
 
 ## Build Output
 RUN echo "Erlang/OTP Version:"
