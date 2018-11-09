@@ -1,4 +1,4 @@
-FROM bitwalker/alpine-elixir:1.7.3
+FROM bitwalker/alpine-elixir:latest
 
 MAINTAINER Carlos Brito Lage <cbl@aruki.pt>
 
@@ -7,7 +7,7 @@ MAINTAINER Carlos Brito Lage <cbl@aruki.pt>
 # of the base images and things like `apt-get update` won't be using
 # old cached versions when the Dockerfile is built.
 ENV REPLACE_OS_VARS "true"
-ENV REFRESHED_AT "2018-09-12-192700"
+ENV REFRESHED_AT "2018-11-09-11013"
 ENV HOME "/opt/app/"
 # Set this so that CTRL+G works properly
 ENV TERM "xterm"
