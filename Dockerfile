@@ -1,4 +1,4 @@
-FROM bitwalker/alpine-elixir:latest
+FROM beardedeagle/alpine-elixir-builder:1.7.4
 
 MAINTAINER Carlos Brito Lage <cbl@aruki.pt>
 
