@@ -1,4 +1,4 @@
-FROM beardedeagle/alpine-elixir-builder:1.7.4@sha256:042dc5437f354e190a56c310b7668e9caeae37c1ee4bb104df9a8d6296d9d1df
+FROM beardedeagle/alpine-elixir-builder:1.8.0@sha256:6a20e4c3de592f5bee0208050b529ed91c3a3048b8ff0eaea1d5b330aaaf94e0
 
 MAINTAINER Carlos Brito Lage <cbl@aruki.pt>
 
@@ -6,7 +6,7 @@ MAINTAINER Carlos Brito Lage <cbl@aruki.pt>
 # is updated with the current date. It will force refresh of all
 # of the base images and things like `apt-get update` won't be using
 # old cached versions when the Dockerfile is built.
-ENV REFRESHED_AT "2019-01-14-1424"
+ENV REFRESHED_AT "2019-01-14-2025"
 ENV REPLACE_OS_VARS "true"
 ENV HOME "/opt/app/"
 # Set this so that CTRL+G works properly
