@@ -6,7 +6,7 @@ MAINTAINER Carlos Brito Lage <cbl@aruki.pt>
 # is updated with the current date. It will force refresh of all
 # of the base images and things like `apt-get update` won't be using
 # old cached versions when the Dockerfile is built.
-ENV REFRESHED_AT "2019-01-9-05-1053"
+ENV REFRESHED_AT "2019-01-14-1424"
 ENV REPLACE_OS_VARS "true"
 ENV HOME "/opt/app/"
 # Set this so that CTRL+G works properly
@@ -14,7 +14,7 @@ ENV TERM "xterm"
 
 RUN \
     apk --no-cache --update upgrade && \
-    apk add --no-cache imagemagick icu-dev zlib zlib-dev && \
+    apk add --no-cache alpine-sdk coreutils imagemagick icu-dev zlib zlib-dev && \
     which magick && \
     magick -version
 
