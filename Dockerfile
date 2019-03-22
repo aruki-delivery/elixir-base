@@ -1,4 +1,4 @@
-FROM beardedeagle/alpine-elixir-builder:1.8.1@sha256:767c2b50a21b068e0a0847e5fe7748651e5e57c614bff576dc5171aaeec59857
+FROM elixir:1.8.1-alpine@sha256:2d995d0f0570418f76a54290388c3dfbdd8a6bec31129e423504625b7fc910a4
 
 MAINTAINER Carlos Brito Lage <cbl@aruki.pt>
 
