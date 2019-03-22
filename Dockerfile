@@ -14,7 +14,7 @@ ENV TERM "xterm"
 
 RUN \
     apk --no-cache --update upgrade && \
-    apk add --no-cache alpine-sdk coreutils imagemagick icu-dev zlib zlib-dev && \
+    apk add --no-cache bash alpine-sdk coreutils imagemagick icu-dev zlib zlib-dev && \
     which magick && \
     magick -version
 
