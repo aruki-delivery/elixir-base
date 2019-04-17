@@ -1,4 +1,4 @@
-FROM elixir:1.8-alpine@sha256:5533e3edd942f048654f5563411928e64e8b51f68bd04758515e73e6d2d2cadc
+FROM elixir:1.8-alpine@sha256:8c11de4f44c8f58dbd4314d7b8b8e89e1f892ed02b30945778a1db3541664d82
 
 MAINTAINER Carlos Brito Lage <cbl@aruki.pt>
 
@@ -6,7 +6,7 @@ MAINTAINER Carlos Brito Lage <cbl@aruki.pt>
 # is updated with the current date. It will force refresh of all
 # of the base images and things like `apt-get update` won't be using
 # old cached versions when the Dockerfile is built.
-ENV REFRESHED_AT "2019-04-05-1334"
+ENV REFRESHED_AT "2019-04-17-0403"
 ENV REPLACE_OS_VARS "true"
 ENV HOME "/opt/app/"
 # Set this so that CTRL+G works properly
