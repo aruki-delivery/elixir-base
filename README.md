@@ -112,3 +112,10 @@ CMD ["foreground"]
 
 # License
 The Aruki Elixir Docker base images are available under the [BSD 3-Clause aka "BSD New" license](http://www.tldrlegal.com/l/BSD3)
+
+# Apple M1 Builds
+
+There is a branch of this image that allows you to build for native ARM for apple M1 compatibility.
+
+Branch is fneves/elixir-1.8.2-arm64
+

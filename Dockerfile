@@ -1,4 +1,4 @@
-FROM elixir:1.8-alpine@sha256:8c11de4f44c8f58dbd4314d7b8b8e89e1f892ed02b30945778a1db3541664d82
+FROM arm64v8/elixir:1.8.2-alpine
 
 MAINTAINER Carlos Brito Lage <cbl@aruki.pt>
 
